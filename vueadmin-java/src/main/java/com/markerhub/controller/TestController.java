@@ -25,9 +25,22 @@ public class TestController {
 
 	// 普通用户、超级管理员
 	// @PreAuthorize("hasAuthority('sys:user:list')")
-	@PreAuthorize("hasAuthority('sys:ok')")
+	// @PreAuthorize("hasAuthority('sys:ok')")
 	@GetMapping("/test/pass")
 	public Result pass() {
+
+		// 加密后密码
+		String password = bCryptPasswordEncoder.encode("111111");
+
+		boolean matches = bCryptPasswordEncoder.matches("111111", password);
+
+		System.out.println("匹配结果：" + matches);
+
+		return Result.succ(password);
+	}
+	// @PreAuthorize("hasAuthority('sys:ok')")
+	@GetMapping("/abc")
+	public Result abc() {
 
 		// 加密后密码
 		String password = bCryptPasswordEncoder.encode("111111");
