@@ -1,17 +1,18 @@
 package com.markerhub.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 @Data
-public class BusinessLoan extends  BaseEntity{
+public class BusinessLoan  implements Serializable{
 
     /**
      * <pre>
