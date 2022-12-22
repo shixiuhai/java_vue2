@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default {
 	state: {
-
 		menuList: [],
 		permList: [],
 

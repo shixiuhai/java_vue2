@@ -1,13 +1,15 @@
 <template>
-	<div>main</div>
+	<div>信息记录okok</div>
 </template>
 
 <script>
 	export default {
-		name: "Index",
+		name: "Okok",
 	}
 </script>
 
 <style scoped>
+
+
 
 </style>

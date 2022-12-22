@@ -20,7 +20,7 @@
 				<i :class="menu.icon"></i>
 				<span>{{menu.title}}</span>
 			</template>
-
+			
 			<router-link :to="item.path" v-for="item in menu.children">
 				<el-menu-item :index="item.name" @click="selectMenu(item)">
 					<template slot="title">
@@ -61,5 +61,13 @@
 <style scoped>
 	.el-menu-vertical-demo {
 		height: 100%;
+	}
+	/* 去掉a标签的线 */
+	a {
+	text-decoration: none;
+	}
+	
+	.router-link-active {
+	text-decoration: none;
 	}
 </style>

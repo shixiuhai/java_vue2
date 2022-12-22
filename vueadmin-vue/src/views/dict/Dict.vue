@@ -1,13 +1,15 @@
 <template>
-	<div>main</div>
+	<div>数字字典</div>
 </template>
 
 <script>
 	export default {
-		name: "Index",
+		name: "Dict",
 	}
 </script>
 
 <style scoped>
+
+
 
 </style>

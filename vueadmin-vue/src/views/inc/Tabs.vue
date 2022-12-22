@@ -1,5 +1,6 @@
 <template>
 	<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" @tab-click="clickTab">
+		<!-- 后台管理系统下面的操作页面记录 -->
 		<el-tab-pane
 				v-for="(item, index) in editableTabs"
 				:key="item.name"
