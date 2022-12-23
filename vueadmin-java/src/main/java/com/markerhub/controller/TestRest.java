@@ -68,7 +68,7 @@ public class TestRest {
         String url="http://127.0.0.1:8081/loan/save";
         JSONObject resp=restService.postForObjectByHeader(url, map, httpHeaders);
         //log.info("结果是{}",resp);
-        return Result.succ("调用api测试rest成功");
+        return Result.succ("调用api测试rest成功"+resp);
 
        
         

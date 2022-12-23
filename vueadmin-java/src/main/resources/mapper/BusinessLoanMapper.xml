@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定位置 -->
+<mapper namespace="com.markerhub.mapper.BusinessLoanMapper">
+    <!-- 查询  id 是方法名称 返回的是实体类类型--> 
+    <select id="findAllBypage" resultType="com.markerhub.entity.BusinessLoan">
+        select * from business_loan;
+
+    </select>
+
+</mapper>

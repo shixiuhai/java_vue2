@@ -7,7 +7,7 @@
 		</el-aside>
 		<el-container>
 			<el-header>
-				<strong>后台管理系统</strong>
+				<strong>借款管理系统</strong>
 
 				<div class="header-avatar">
 
