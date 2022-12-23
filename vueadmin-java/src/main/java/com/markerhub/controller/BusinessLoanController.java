@@ -11,11 +11,13 @@ import com.markerhub.common.utils.FormateDateUtils;
 
 import java.io.IOException;
 import java.util.Date;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.markerhub.entity.BusinessLoan;
@@ -33,32 +35,33 @@ public class BusinessLoanController {
     @PostMapping("/save")
     // @PreAuthorize("hasRole('admin')") @RequestParam(name="aa")
     // public Result AddLoan(@RequestBody BusinessLoan businessLoan, @RequestParam MultipartFile pictureFile) {
-    public Result AddLoan(@RequestParam(required =  false) MultipartFile pictureFile, 
+    public Result addLoan(@RequestParam(required =  false) MultipartFile pictureFile, 
                           @RequestParam String brrowerName,
                           @RequestParam String startTime,
                           @RequestParam String endTime,
                           @RequestParam(required = false) String BorrowingPeriod,
-                          @RequestParam(required = false) Integer status) {
+                          @RequestParam(required = true,defaultValue = "0") String status) {
 
         // 使用对象接收formdata参数
         BusinessLoan businessLoan = new BusinessLoan();
         businessLoan.setBrrowerName(brrowerName);
         businessLoan.setStartTime(FormateDateUtils.paseStringDate(startTime, "yyyy-MM-dd"));
         businessLoan.setEndTime(FormateDateUtils.paseStringDate(endTime, "yyyy-MM-dd"));
+        businessLoan.setStatus(status);
         // 计算借款时长
         long days=FormateDateUtils.jdk8DayDiff(startTime, endTime, "yyyy-MM-dd");
         businessLoan.setBorrowingPeriod(String.valueOf(days));
         // 保存文件
         String[] exts={"jpg","png","jpeg","PNG","JPEG","conf"};
-        // try {
-        //     String fileName=FileUploadUtils.setPathName("C:\\Users\\walker\\Desktop\\upload").setAllowedExtension(exts).setMaxSize(10).upload(pictureFile);
-        //     // 设置文件名称
-        //     businessLoan.setImage("C:\\Users\\walker\\Desktop\\upload"+fileName);
-        // } catch (IOException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        //     return Result.fail("文件上传错误");
-        // }
+        try {
+            String fileName=FileUploadUtils.setPathName("C:\\Users\\walker\\Desktop\\upload").setAllowedExtension(exts).setMaxSize(10).upload(pictureFile);
+            // 设置文件名称
+            businessLoan.setImage("C:\\Users\\walker\\Desktop\\upload"+fileName);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return Result.fail("文件上传错误");
+        }
         
         businessLoanService.save(businessLoan);
         // businessLoan.setEndTime(endTime);
@@ -75,5 +78,15 @@ public class BusinessLoanController {
 
     // 修改数据
 
-    // 删除数据
+    // 查询数据
+    @GetMapping("/get")
+    public Result getLoan(@RequestParam(required = true) Integer page,
+                          @RequestParam(required = true) Integer pageSize){
+        // page传入实体类
+        Page<BusinessLoan> pageInfo= new Page<BusinessLoan>(page,pageSize);
+        // businessLoanService.findAll();
+        log.info("借款信息查询成功");
+
+        return Result.succ("ok");
+    }
 }
