@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.markerhub.common.lang.Result;
 
 import com.markerhub.common.utils.FormateDateUtils;
+import com.markerhub.common.utils.PageUtils;
 
 import java.io.IOException;
 import java.util.Date;
@@ -17,8 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.markerhub.entity.BusinessLoan;
 import lombok.extern.slf4j.Slf4j;
@@ -73,20 +76,34 @@ public class BusinessLoanController {
 
     }
     
-
     // 删除数据
+    @DeleteMapping("/delete")
+    public Result delete(@RequestParam(required = true) String id){
+        businessLoanService.removeById(id);
+        return Result.succ(id+"删除成功");
+
+    }
 
     // 修改数据
+    @PutMapping("/update")
+    public Result update(@RequestParam(required =  false) MultipartFile pictureFile, 
+                        @RequestParam String brrowerName,
+                        @RequestParam String startTime,
+                        @RequestParam String endTime,
+                        @RequestParam(required = false) String BorrowingPeriod,
+                        @RequestParam(required = true,defaultValue = "0") String status){
+                        return Result.succ(status);
+    }
 
     // 查询数据
     @GetMapping("/get")
     public Result getLoan(@RequestParam(required = true) Integer page,
                           @RequestParam(required = true) Integer pageSize){
+        log.info("页码{},页码尺寸{}",page,pageSize);
         // page传入实体类
-        Page<BusinessLoan> pageInfo= new Page<BusinessLoan>(page,pageSize);
-        // businessLoanService.findAll();
+        PageUtils all = businessLoanService.findAllBypage(page, pageSize);
         log.info("借款信息查询成功");
 
-        return Result.succ("ok");
+        return Result.succ(all);
     }
 }

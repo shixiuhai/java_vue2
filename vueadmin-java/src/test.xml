@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.walk.business.dao.AssociationAnchorDao">
+
+    <insert id="distinctSave">
+INSERT INTO business_association_anchor (anchor_id,association_id)select #{anchorId},#{associationId} where not exists (select id from business_association_anchor where anchor_id = #{anchorId} and association_id = #{associationId})
+    </insert>
+
+    <select id="findAssociationIdByAnchorId" resultType="String">
+      select association_id from business_association_anchor where  anchor_id=#{anchorId}
+    </select>
+
+    <select id="findAnchorIdByAssociationId" resultType="String">
+        select anchor_id from business_association_anchor where association_id = #{associationId}
+    </select>
+</mapper>

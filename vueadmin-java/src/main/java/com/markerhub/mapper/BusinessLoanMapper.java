@@ -7,7 +7,7 @@ import com.markerhub.entity.BusinessLoan;
 import java.util.List;
 @Mapper
 public interface BusinessLoanMapper extends BaseMapper<BusinessLoan> {
-    // mapper也需要定义 IPage 实现分页
+    // mapper也需要定义 IPage 实现分页 IPage<BusinessLoan> page
     IPage<BusinessLoan> findAllBypage(IPage<BusinessLoan> page);
 
 }
