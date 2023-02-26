@@ -48,6 +48,14 @@ public class CaptchaFilter extends OncePerRequestFilter {
 
 		String code = httpServletRequest.getParameter("code");
 		String key = httpServletRequest.getParameter("token");
+		
+		// 手机端登陆
+		if(!StringUtils.isBlank(code) && code=="phone")
+		{
+			redisUtil.hdel(Const.CAPTCHA_KEY, key);
+			return ;
+
+		}
 
 		if (StringUtils.isBlank(code) || StringUtils.isBlank(key)) {
 			throw new CaptchaException("验证码错误");
