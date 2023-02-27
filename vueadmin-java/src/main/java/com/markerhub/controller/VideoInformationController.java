@@ -21,7 +21,7 @@ public class VideoInformationController {
     // @PreAuthorize("hasAuthority('sys:manage')")
     // 列表也展示保护
     @GetMapping("")
-    public Result findAll(@RequestParam(defaultValue = "1") int page,
+    public Result findAll(@RequestParam(defaultValue = "1",required = true) int page,
                           @RequestParam(defaultValue = "10") int size,
                           @RequestParam(defaultValue = "电影") String type,
                           @RequestParam(defaultValue = "内地") String area ){
