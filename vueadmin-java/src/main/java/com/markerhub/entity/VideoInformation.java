@@ -33,8 +33,8 @@ public class VideoInformation implements Serializable {
      * 上映时间
      * </pre>
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") //前端传入
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // 后端传出
     private Date	releaseTime;
 
     /**
@@ -78,5 +78,16 @@ public class VideoInformation implements Serializable {
      * </pre>
      */
     private String	introduction;
+
+    /**
+     * <pre>
+     * 生成记录时间
+     * </pre>
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd") //前端传入
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // 后端传出
+    private Date	createdTime;
+
+
     
 }
