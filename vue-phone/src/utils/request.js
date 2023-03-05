@@ -16,8 +16,35 @@ import axios from 'axios'
 // 调用 axios.create() 方法，创建 axios 的实例对象
 const instance = axios.create({
   // 请求根路径
-  baseURL: 'http://192.168.1.3:8081'
+  baseURL: 'http://192.168.1.3:8081',
+  // 请求超时时间设置
+  timeout: 5000,
+  // 请求的headers设置
+	headers: {
+		'Content-Type': "application/json; charset=utf-8"
+	}
 })
+
+//前端返回格式
+// config
+// data
+// headers
+
+
+// 响应拦截器（注意：响应拦截器也应该绑定给 instance 实例）
+instance.interceptors.response.use(
+  // 这个位置response可以用任何数据来接参
+  response => {
+    // console.log(response)
+    // let authorization=(response.headers["authorization"])
+    // console.log(authorization)
+    return response
+  
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 
 export default instance
 

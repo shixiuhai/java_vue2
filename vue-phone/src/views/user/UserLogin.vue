@@ -44,8 +44,12 @@
 
 </template>
 <script>
+// 导入vux里的相关
+// https://blog.csdn.net/qq_41983641/article/details/113246418 mapMutations相关使用
+import { mapMutations } from 'vuex'
 
 // 导入登陆相关接口
+
 import {captchaAPI,loginAPI} from "@/api/user/userLogin";
 export default {
     name:"UserLogin",
@@ -54,9 +58,9 @@ export default {
             // 登录表单的数据，最终要双向绑定到 form 这个数据对象上
             form: {
                 // 用户的手机号
-                username: '',
+                username: 'admin',
                 // 登录的密码
-                password: '',
+                password: '111111',
                 // 登陆平台
                 code:"phone",
                 // 获取jwt认证的toekn
@@ -68,6 +72,8 @@ export default {
         }
     },
     methods:{
+        // 2. 映射 mutations 中存储token的方法
+        ...mapMutations(['updateAuthorizationInfo']),
         // getcaptcha是非异步接口
         // 获取验证码接口拿到token
         getcaptcha(){
@@ -80,11 +86,24 @@ export default {
         // 用户登陆
         async login(){
             this.form.token= (await captchaAPI()).data.data.token
+            console.log(this.form.token)
             // console.log(this.token)
-            console.log(this.form.username,this.form.password,this.form.code,this.form.token)
+            // console.log(this.form.username,this.form.password,this.form.code,this.form.token)
            
-            const {data:res} =  await loginAPI(this.form)
-            console.log(res)
+            const loginResp =  await loginAPI(this.form)
+            // 判断是否登陆成功
+            // loginResp.data 这个是vue前端默认返回的数据路经
+            if(loginResp.data.code==200){
+                // console.log(res)
+                console.log("登陆成功")
+                console.log(loginResp.headers["authorization"])
+                // 3. 把获取到的authorization，存储到 vuex 中
+                this.updateAuthorizationInfo(loginResp.headers["authorization"])
+                // 4. 登陆成功后调转到首页
+                // https://zhuanlan.zhihu.com/p/86116684 调整传值方案
+
+
+            }
             
 
         },
