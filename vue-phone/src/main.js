@@ -2,13 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-// 导入vant组件
+// 导入 Vant 和 组件的样式表
 import Vant from 'vant'
 import 'vant/lib/index.css'
 
-// 使用Vant组件,一次导入所有的vant组件
+// 导入全局样式表
+import './index.less'
+
+// 注册全局插件
 Vue.use(Vant)
-// import store from './store'
 
 Vue.config.productionTip = false
 

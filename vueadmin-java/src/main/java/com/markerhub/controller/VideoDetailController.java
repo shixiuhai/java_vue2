@@ -11,14 +11,16 @@ import com.markerhub.service.VideoDetailService;
 import com.markerhub.utils.PageUtils;
 
 @RestController
-@RequestMapping("/videoDetail")
+@RequestMapping("/videoDetail") // 获取某部视频的一页详细信息
 public class VideoDetailController {
     @Autowired
     private VideoDetailService videoDetailService;
     @GetMapping("")
+    // (@RequestParam(value = "time",required = false) String createtime)
     public Result findAll(@RequestParam(defaultValue = "1") int page,
-                          @RequestParam(defaultValue = "10") int size){
-            PageUtils all = videoDetailService.findAll(page, size);
+                          @RequestParam(defaultValue = "10") int size,
+                          @RequestParam(required = false) Integer informationId){
+            PageUtils all = videoDetailService.findAll(page, size,informationId);
             return Result.succ(all);
         
     }

@@ -5,6 +5,6 @@ import com.markerhub.entity.VideoDetail;
 import com.markerhub.utils.PageUtils;
 
 public interface VideoDetailService extends IService<VideoDetail>{
-    public PageUtils findAll(int page,int size);
+    public PageUtils findAll(int page,int size,Integer number);
     
 }

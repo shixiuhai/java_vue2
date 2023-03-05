@@ -18,7 +18,7 @@ public class ParseVideoController {
 
     @GetMapping("")
     public Result findAll(@RequestParam(defaultValue = "1") int page,
-                   @RequestParam(defaultValue = "10") int size){
+                          @RequestParam(defaultValue = "10") int size){
                     PageUtils all = parseVideoService.findAll(page, size);
 
                     return Result.succ(all);
