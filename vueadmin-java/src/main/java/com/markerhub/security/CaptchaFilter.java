@@ -53,21 +53,18 @@ public class CaptchaFilter extends OncePerRequestFilter {
 		if(!StringUtils.isBlank(code) && code.equals("phone"))
 		{
 		 
-		 if(redisUtil.hHasKey(Const.CAPTCHA_KEY, key)){
-			redisUtil.hdel(Const.CAPTCHA_KEY,key);
-			return;
+			if(redisUtil.hHasKey(Const.CAPTCHA_KEY, key)){
+				redisUtil.hdel(Const.CAPTCHA_KEY,key);
+				return;
 
-		 }
-		 else{
-			throw new CaptchaException("token错误");
+			}
+			else{
+				throw new CaptchaException("token错误");
 
-		 }
-		
-
-			
-			
+			}	
 
 		}
+		// pc端登陆
 
 		if (StringUtils.isBlank(code) || StringUtils.isBlank(key)) {
 			throw new CaptchaException("验证码错误");

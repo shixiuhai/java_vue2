@@ -30,6 +30,7 @@ const instance = axios.create({
 // data
 // headers
 
+// 请求拦截器
 
 // 响应拦截器（注意：响应拦截器也应该绑定给 instance 实例）
 instance.interceptors.response.use(

@@ -46,6 +46,7 @@
 <script>
 // 导入vux里的相关
 // https://blog.csdn.net/qq_41983641/article/details/113246418 mapMutations相关使用
+// vue组件传值方式
 import { mapMutations } from 'vuex'
 
 // 导入登陆相关接口
