@@ -72,26 +72,33 @@ export default {
             
         }
     },
+    // 所有涉及调用接口的都必须 async + await
     methods:{
         // 2. 映射 mutations 中存储token的方法
         ...mapMutations(['updateAuthorizationInfo']),
         // getcaptcha是非异步接口
         // 获取验证码接口拿到token
-        getcaptcha(){
+        async getcaptcha(){
             // 接口没有传值括号是否可以省略需要验证一下
             // {data:res} 含义指将返回的结果data重命名为res
-            const {data:res}=captchaAPI()
+            const {data:res}= await captchaAPI()
             return res
 
         },
-        // 用户登陆
+        // 用户登陆 所有调用js函数的方法都必须 async+await
         async login(){
-            this.form.token= (await captchaAPI()).data.data.token
-            console.log(this.form.token)
+            const captcha= await this.getcaptcha()
+            // console.log("-----------")
+            // console.log(captcha.data.token)
+            // console.log("-----------")
+
+            this.form.token= captcha.data.token
+            // console.log(this.form.token)
             // console.log(this.token)
             // console.log(this.form.username,this.form.password,this.form.code,this.form.token)
            
             const loginResp =  await loginAPI(this.form)
+            console.log(loginResp)
             // 判断是否登陆成功
             // loginResp.data 这个是vue前端默认返回的数据路经
             if(loginResp.data.code==200){
