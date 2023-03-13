@@ -13,6 +13,7 @@ export const captchaAPI=()=>{
 // 调用登陆接口
 export const loginAPI =(form)=>{
     //return request.post("/login?"+qs.stringify(form))
+    console.log("/login?"+qs.stringify(form))
     return request({
         method:"post",
         url:"/login?"+qs.stringify(form)

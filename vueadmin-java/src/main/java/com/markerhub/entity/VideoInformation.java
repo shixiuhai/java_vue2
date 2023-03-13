@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
@@ -17,7 +18,9 @@ public class VideoInformation implements Serializable {
      * 
      * </pre>
      */
-    private String	id;
+    @TableId(value = "id",type=IdType.AUTO)
+    // Long类型默认大写
+    private Long id;
 
     /**
      * <pre>

@@ -6,6 +6,6 @@ import com.markerhub.utils.PageUtils;
 
 
 public interface VideoInformationService extends IService<VideoInformation>{
-    public PageUtils findAll(int page, int size,String type,String area);
+    public PageUtils findAll(int page, int size,String type,String area,String videoName);
     
 }

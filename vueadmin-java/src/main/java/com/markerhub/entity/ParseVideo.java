@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class ParseVideo implements Serializable{
      * 
      * </pre>
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer	id;
 
     /**

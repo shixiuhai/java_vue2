@@ -58,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/favicon.ico",
 			"/videoInformation",
 			"/videoDetail",
-			"/parseVideo"
+			"/parseVideo",
+			"/sysDict"
 
 	};
 

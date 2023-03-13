@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum VideoType {
-    mj(4,"美剧"),
-    hj(5,"韩剧"),
-    hy(6,"华语"),
-    zy(9,"综艺"),
-    dj(10,"电影"),
-    dm(11,"动漫");
+    mj(1,"美剧"),
+    hj(2,"韩剧"),
+    hy(3,"华语"),
+    zy(4,"综艺"),
+    dj(5,"电影"),
+    dm(6,"动漫");
     private Integer type;
     private String name;
     public static Integer getType(String name){

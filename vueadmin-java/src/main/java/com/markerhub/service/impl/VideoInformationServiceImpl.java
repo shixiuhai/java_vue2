@@ -25,12 +25,13 @@ import java.util.Objects;
 
 @Service
 public class VideoInformationServiceImpl extends ServiceImpl<VideoInformationMapper,VideoInformation> implements VideoInformationService{
-    public PageUtils findAll(int page, int size,String type,String area){
+    public PageUtils findAll(int page, int size,String type,String area,String videoName){
         IPage<VideoInformation> all = this.page(
             new Page<VideoInformation>(page,size),
             new QueryWrapper<VideoInformation>()
-                .eq(Objects.nonNull(VideoType.getType(type)),"type",VideoType.getType(type))
-                .eq(Objects.nonNull(VideoArea.getType(area)),"area",VideoArea.getType(area))
+                .eq(!StringUtils.isBlank(type),"type",VideoType.getType(type))
+                .eq(!StringUtils.isBlank(area),"area",VideoArea.getType(area))
+                .like(!StringUtils.isBlank(videoName),"video_name",videoName)
             
         );
         return new PageUtils(all);

@@ -21,12 +21,13 @@ public class VideoInformationController {
     // @PreAuthorize("hasAuthority('sys:manage')")
     // 列表也展示保护
     @GetMapping("")
-    public Result findAll(@RequestParam(defaultValue = "1",required = true) int page,
-                          @RequestParam(defaultValue = "10") int size,
-                          @RequestParam(defaultValue = "电影") String type,
-                          @RequestParam(defaultValue = "内地") String area ){
+    public Result findAll(@RequestParam(defaultValue = "1",required = false) int page,
+                          @RequestParam(defaultValue = "10",required = false) int size,
+                          @RequestParam(defaultValue = "",required = false) String typeName,
+                          @RequestParam(defaultValue = "",required = false) String areaName,
+                          @RequestParam(defaultValue = "",required = false) String videoName ){
         // VideoInformation videoInformation = new VideoInformation();
-        PageUtils all = videoInformationService.findAll(page,size,type,area);
+        PageUtils all = videoInformationService.findAll(page,size,typeName,areaName,videoName);
         return Result.succ(all);
     }
     
