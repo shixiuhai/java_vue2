@@ -11,11 +11,59 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 26/02/2023 16:10:12
+ Date: 13/03/2023 22:07:40
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for parse_video
+-- ----------------------------
+DROP TABLE IF EXISTS `parse_video`;
+CREATE TABLE `parse_video`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `parse_link` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '三方视频解析链接',
+  `parse_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '三方解析链接的别称',
+  `created_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '生成记录时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of parse_video
+-- ----------------------------
+INSERT INTO `parse_video` VALUES (1, 'http://ww.bai.com', '163解析', '2023-02-27 21:34:21');
+
+-- ----------------------------
+-- Table structure for sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict`  (
+  `id` bigint(0) NOT NULL,
+  `dic_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `type` int(0) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `status` int(0) NULL DEFAULT NULL,
+  `created_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_dict
+-- ----------------------------
+INSERT INTO `sys_dict` VALUES (1, 'VideoArea', 1, '内地', 1, '2023-03-06 20:44:44');
+INSERT INTO `sys_dict` VALUES (2, 'VideoArea', 2, '韩国', 1, '2023-03-07 23:24:45');
+INSERT INTO `sys_dict` VALUES (3, 'VideoArea', 3, '欧美', 1, '2023-03-07 23:36:44');
+INSERT INTO `sys_dict` VALUES (4, 'VideoArea', 4, '日本', 1, '2023-03-07 23:36:54');
+INSERT INTO `sys_dict` VALUES (5, 'VideoArea', 5, '香港', 1, '2023-03-07 23:55:23');
+INSERT INTO `sys_dict` VALUES (6, 'VideoArea', 6, '印度', 1, '2023-03-07 23:55:44');
+INSERT INTO `sys_dict` VALUES (7, 'VideoArea', 7, '自定义区域', 1, '2023-03-08 00:47:29');
+INSERT INTO `sys_dict` VALUES (8, 'VideoType', 1, '美剧', 1, '2023-03-08 22:49:53');
+INSERT INTO `sys_dict` VALUES (9, 'VideoType', 2, '韩剧', 1, '2023-03-08 22:49:56');
+INSERT INTO `sys_dict` VALUES (10, 'VideoType', 3, '华语', 1, '2023-03-08 22:49:59');
+INSERT INTO `sys_dict` VALUES (11, 'VideoType', 4, '综艺', 1, '2023-03-08 22:50:02');
+INSERT INTO `sys_dict` VALUES (12, 'VideoType', 5, '电影', 1, '2023-03-08 22:50:05');
+INSERT INTO `sys_dict` VALUES (13, 'VideoType', 6, '动漫', 1, '2023-03-08 22:50:08');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -170,5 +218,49 @@ INSERT INTO `sys_user_role` VALUES (4, 1, 6);
 INSERT INTO `sys_user_role` VALUES (7, 1, 3);
 INSERT INTO `sys_user_role` VALUES (13, 2, 3);
 INSERT INTO `sys_user_role` VALUES (14, 3, 6);
+
+-- ----------------------------
+-- Table structure for video_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `video_detail`;
+CREATE TABLE `video_detail`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `information_id` int(0) NULL DEFAULT NULL COMMENT '信息表的id',
+  `number` int(0) NULL DEFAULT NULL COMMENT '视频第几集',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频url',
+  `created_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '生成记录时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of video_detail
+-- ----------------------------
+INSERT INTO `video_detail` VALUES (1, 2, 1, 'httP//ww.baidu.co', '2023-02-27 21:18:40');
+
+-- ----------------------------
+-- Table structure for video_information
+-- ----------------------------
+DROP TABLE IF EXISTS `video_information`;
+CREATE TABLE `video_information`  (
+  `id` bigint(0) NOT NULL,
+  `video_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频名称',
+  `video_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频海报地址',
+  `release_time` datetime(0) NULL DEFAULT NULL COMMENT '视频上映时间',
+  `type` int(0) NULL DEFAULT NULL COMMENT '视频类型',
+  `area` int(0) NULL DEFAULT NULL COMMENT '视频发布区域',
+  `episodes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频的集数',
+  `director` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频导演',
+  `starring` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频主演',
+  `introduction` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频简介',
+  `created_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '生成记录时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of video_information
+-- ----------------------------
+INSERT INTO `video_information` VALUES (1, '11', 'http', '2023-02-26 17:15:10', 10, 1, '3', '12', '12', '你好', NULL);
+INSERT INTO `video_information` VALUES (2, '22', 'http', '2023-03-07 22:54:20', 10, 1, '3', '12', '12', '23', '2023-03-07 22:54:32');
+INSERT INTO `video_information` VALUES (3, '33', NULL, '2023-03-07 22:58:41', 10, 4, NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
