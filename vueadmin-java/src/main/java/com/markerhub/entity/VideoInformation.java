@@ -90,6 +90,7 @@ public class VideoInformation implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd") //前端传入
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // 后端传出
     private Date	createdTime;
+    private String videoScore;
 
 
     

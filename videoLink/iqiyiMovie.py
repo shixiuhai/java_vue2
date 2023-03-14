@@ -1,7 +1,9 @@
 
 import requests
 import time
-# from OperateMysql.ClassModel import OperateMysql
+import pymysql
+import random
+
 def get_iqy():
 
     headers = {
@@ -22,16 +24,19 @@ def get_iqy():
     }
     """
     """
-    for i in range(11, 500):         #循环1-136 第137 json 是空的 也就是全部爬完
+    for i in range(1, 500):         #循环1-136 第137 json 是空的 也就是全部爬完
         try:
-            url_0 = "https://pcw-api.iqiyi.com/search/recommend/list?channel_id=1&data_type=1&mode=11&page_id="
-            url_0 = url_0 + str(i) + "&ret_num=48&session=2e9d98658b8d4f1d54ef227b03019500"
+            url_0 = "https://pcw-api.iqiyi.com/search/recommend/list?channel_id=1&data_type=1&mode=24&page_id="
+            url_0 = url_0 + str(i) + "&ret_num=48&session=5f1d986138ae74936e9e41352d5ca407"
             print(url_0)        #输出拼接好的url
             response = requests.get(url=url_0, headers=headers).json()
+            print(response)
             # print(response)
             # print(response)
             if(response["code"]=='A00000'):
                 responseMovieList=response['data']['list']
+                print("成功")
+                time.sleep(random.randint(1,2))
                 # 遍历每页每部电影对象
                 for item in responseMovieList:
                     try:
@@ -55,54 +60,31 @@ def get_iqy():
                         except :
                             videoScore=0
                         videoUrl=item["playUrl"]
-                        print(videoUrl,videoName,videoImg)
-
-                        # #  插入前做个删除
-                        # videoInformationIdList=OperateMysql(host=host,user=user,password=password,database=database).\
-                        # selectData("select id from video_information where video_name='%s' order by id desc"%videoName)
-                        # if len(videoInformationIdList)!=0:
-                        #     videoInformationId=videoInformationIdList[0]
-                        #     videoNumberId=OperateMysql(host=host,user=user,password=password,database=database).\
-                        #     selectData("select id from video_number where video_information_id='%s' order by id desc"%videoInformationId)[0]
-
-
-                        #     OperateMysql(host=host,user=user,password=password,database=database).\
-                        #     insertData("delete from video_information where video_name='%s'"%videoName)
-            
-                        #     OperateMysql(host=host,user=user,password=password,database=database).\
-                        #     insertData("delete from video_number where video_information_id='%s'"%videoInformationId)
-
-                        #     OperateMysql(host=host,user=user,password=password,database=database).\
-                        #     insertData("delete from video_information_url where video_number_id='%s'"%videoNumberId)
+                        #  插入到信息表
+                        cursor=db.cursor()
+                        cursor.execute("replace into video_information \
+                                       (video_name,video_img,release_time,\
+                                        episodes,director,starring,introduction,video_score) \
+                                        values (%s,%s,%s,%s,%s,%s,%s,%s)",
+                                        (videoName,videoImg,releaseTime,
+                                        videoEpisodes,videoDirector,videoStarring,videoIntroduction,videoScore))
+                        informationId=db.insert_id()
+                        db.commit()
+                        cursor.close()
+                        # 插入到详情表
+                        cursor=db.cursor()
+                        cursor.execute("replace into video_detail \
+                                       (information_id,number,url) \
+                                        values (%s,%s,%s)",
+                                        (informationId,1,videoUrl))
+                        db.commit()
+                        cursor.close()
                         
                         
-                        # # 对电影数据进行入库处理
-                        # # 1. 先插入到videoInformation表中
-                        # OperateMysql(host=host,user=user,password=password,database=database).\
-                        # insertData("replace into video_information \
-                        # (video_name,video_img,release_time,type,\
-                        # area,episodes,director,starring,introduction,score) \
-                        # values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                        # ,(videoName,videoImg,releaseTime,videoType,videoArea,
-                        # videoEpisodes,videoDirector,videoStarring,videoIntroduction,videoScore))
-                        # # print(videoStarring)
-                        # # 2. 插入到集数表中
-                        # # 插叙一下刚刚插入的id
-                        # videoInformationId=OperateMysql(host=host,user=user,password=password,database=database).\
-                        # selectData("select id from video_information where video_name='%s' order by id desc"%videoName)[0]
-
-                        # # 插入
-                        # OperateMysql(host=host,user=user,password=password,database=database).insertData("insert into video_number (video_information_id,video_number) values (%s,%s)",(videoInformationId,1))
-
-                        # # 3. 插入到链接表中
-                        # # 先查询一下number_id
-                        # videoNumberId=OperateMysql(host=host,user=user,password=password,database=database).\
-                        # selectData("select id from video_number where video_information_id='%s' order by id desc"%videoInformationId)[0]
-                        # # 插入
-                        # OperateMysql(host=host,user=user,password=password,database=database).insertData("insert into video_information_url(video_number_id,video_url) values (%s,%s)",(videoNumberId,videoUrl))
-                        # time.sleep(3)
-                        # print(videoName)
-                    except:
+                        
+                       
+                    except Exception as error:
+                        print(error)
                         continue
         except:
             time.sleep(10)
@@ -111,13 +93,12 @@ def get_iqy():
 
                 
 
-            #     print(videoName)
-            # time.sleep(200)
-
 
 if __name__ == "__main__":
-    host="127.0.0.1"
-    user="root"
-    password="sxh.200008"
-    database="video"
+    db = pymysql.connect(
+        host="127.0.0.1",
+        user="root",
+        password="sxh.200008",
+        database="video"
+    )
     get_iqy()
