@@ -17,6 +17,12 @@
             <van-tab v-for="index in areaNameList" :title="index.name" :name="index.name" :key="index.name">
             </van-tab> 
         </van-tabs>
+        <!-- 轮播图片 -->
+        <van-swipe :autoplay="3000">
+            <van-swipe-item v-for="(image, index) in images" :key="index">
+                <img v-lazy="image" with="120" height="130" />
+            </van-swipe-item>
+        </van-swipe>
   </div>
 
 </template>
@@ -33,7 +39,11 @@
                 // 视频类型tab标签汇总列表
                 typeNameList:[],
                 // 视频区域tab标签汇总列表
-                areaNameList:[]
+                areaNameList:[],
+                images: [
+                'https://img01.yzcdn.cn/vant/apple-4.jpg',
+                'https://img01.yzcdn.cn/vant/apple-2.jpg',
+                ]
                 
             }
         },
@@ -61,7 +71,7 @@
             async getAreaName(){
                 const{data:res} =  await getDicAPI("VideoArea");
                 this.areaNameList=res.data.list;
-                console.log(res.data.data.list);
+                console.log(res.data.list);
 
             },
             // 切换视频类型tab标签页获取视频类型
@@ -77,4 +87,7 @@
     }
 </script>
 <style scoped lang="less">
+
+
 </style>
+   
