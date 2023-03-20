@@ -12,4 +12,16 @@ export const getDicAPI=(dicName)=>{
 
 }
 
+export const listVideoAPI=(page)=>{
+    return request({
+        method:"get",
+        url:"/videoInformation",
+        params:{
+            page:page
+        }
+
+    })
+
+}
+
 

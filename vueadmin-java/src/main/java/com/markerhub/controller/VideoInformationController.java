@@ -22,7 +22,7 @@ public class VideoInformationController {
     // 列表也展示保护
     @GetMapping("")
     public Result findAll(@RequestParam(defaultValue = "1",required = false) int page,
-                          @RequestParam(defaultValue = "10",required = false) int size,
+                          @RequestParam(defaultValue = "15",required = false) int size,
                           @RequestParam(defaultValue = "",required = false) String typeName,
                           @RequestParam(defaultValue = "",required = false) String areaName,
                           @RequestParam(defaultValue = "",required = false) String videoName ){

@@ -34,15 +34,16 @@ export default new Vuex.Store({
       // 把提交过来的 payload 对象，作为 tokenInfo 的值
       state.authorization = authorization
       // 测试 state 中是否有数据
+      console.log("打印state中")
       console.log(state)
       // 存入本地中
       // 如果希望在 Mutation A 中调用 Mutation B，需要通过 this.commit() 方法来实现
       // this 表示当前的 new 出来的 store 实例对象
-      this.commit('saveStateToStorage')
+      this.commit('saveStateAuthToStorage')
     },
-    // 将 state 持久化存储到本地
-    saveStateToStorage(state) {
-      localStorage.setItem('state', JSON.stringify(state))
+    // 将 state 持久化存储到本地 存储token
+    saveStateAuthToStorage(state) {
+      localStorage.setItem('authorization', JSON.stringify(state.authorization))
     }
   },
   actions: {

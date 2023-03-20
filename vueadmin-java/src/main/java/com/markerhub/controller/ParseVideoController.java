@@ -15,12 +15,10 @@ import com.markerhub.utils.PageUtils;
 public class ParseVideoController {
     @Autowired
     ParseVideoService parseVideoService;
-
     @GetMapping("")
     public Result findAll(@RequestParam(defaultValue = "1") int page,
                           @RequestParam(defaultValue = "10") int size){
                     PageUtils all = parseVideoService.findAll(page, size);
-
                     return Result.succ(all);
 
     }
