@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
-
-
 // 初始化从storage读取数值到state
 // 初始的 state 对象
 let initState = {
@@ -33,6 +32,7 @@ export default new Vuex.Store({
       
       // 把提交过来的 payload 对象，作为 tokenInfo 的值
       state.authorization = authorization
+      // state.abc="3"
       // 测试 state 中是否有数据
       console.log("打印state中")
       console.log(state)
@@ -44,6 +44,7 @@ export default new Vuex.Store({
     // 将 state 持久化存储到本地 存储token
     saveStateAuthToStorage(state) {
       localStorage.setItem('authorization', JSON.stringify(state.authorization))
+      // localStorage.setItem('abc', JSON.stringify(state.abc))
     }
   },
   actions: {

@@ -108,7 +108,7 @@ export default {
                 // 3. 把获取到的authorization，存储到 vuex 中
                 this.updateAuthorizationInfo(loginResp.headers["authorization"])
                 // 4. 登陆成功后调转到首页
-                // https://zhuanlan.zhihu.com/p/86116684 调整传值方案
+                // https://zhuanlan.zhihu.com/p/86116684 跳转传值方案
 
 
             }

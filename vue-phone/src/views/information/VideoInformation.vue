@@ -73,7 +73,7 @@
                 finished:false,
                 totalPage:0,
                 // 滚动距离
-                offset: 100,
+                offerset: 100,
 
 
 

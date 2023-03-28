@@ -12,6 +12,8 @@
 
 // 7、使用export导出的成员，如果想换个变量名称接收，可以使用as来起别名
 import axios from 'axios'
+import store from '@/store/index'
+
 
 // 调用 axios.create() 方法，创建 axios 的实例对象
 const instance = axios.create({
@@ -31,6 +33,24 @@ const instance = axios.create({
 // headers
 
 // 请求拦截器
+instance.interceptors.request.use(
+  config => {
+    // 1. 获取 token 值
+    const tokenStr = store.state.authorization
+    // 2. 判断 tokenStr 的值是否为空
+    if (tokenStr) {
+      // 3. 添加身份认证字段
+      //.headers.Authorization = `Bearer ${tokenStr}`
+      config.headers.Authorization = tokenStr
+      console.log("打印出了header")
+      console.log(config)
+    }
+    return config
+  },
+  function(error) {
+    return Promise.reject(error)
+  }
+)
 
 // 响应拦截器（注意：响应拦截器也应该绑定给 instance 实例）
 instance.interceptors.response.use(
