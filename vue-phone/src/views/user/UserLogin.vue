@@ -51,7 +51,8 @@ import { mapMutations } from 'vuex'
 
 // 导入登陆相关接口
 
-import {captchaAPI,loginAPI} from "@/api/user/userLogin";
+import {captchaAPI,loginAPI} from "@/api/user/userLogin"
+import router from "@/router/index"
 export default {
     name:"UserLogin",
     data(){
@@ -107,6 +108,8 @@ export default {
                 console.log(loginResp.headers["authorization"])
                 // 3. 把获取到的authorization，存储到 vuex 中
                 this.updateAuthorizationInfo(loginResp.headers["authorization"])
+                // 跳转页面
+                router.push("/")
                 // 4. 登陆成功后调转到首页
                 // https://zhuanlan.zhihu.com/p/86116684 跳转传值方案
 
