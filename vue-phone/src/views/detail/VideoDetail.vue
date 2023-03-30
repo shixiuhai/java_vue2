@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div >
       <!-- <h1>{{ movie.title }}</h1> -->
-      <VideoPlayer :type="movie.videoType" :url="movie.videoUrl" />
+      <VideoPlayer :type="movie.videoType" :url="movie.videoUrl"/>
     </div>
   </template>
   
@@ -19,8 +19,8 @@
             videoType:'video',
             //videoUrl:"https://www.jiexila.com/?url=http://www.iqiyi.com/v_b13ju559og.html"
             //videoUrl:"http://www.iqiyi.com/v_b13ju559og.html"
-            //videoUrl:"http://jhwenhua.shenke.group/static//video/2/2023-03-30/39356994/1680183014159.mp4"
-            videoUrl:"https://pili-live-hdl.qingyajiu.com/live/7630e2be8af17546b47245fbca34a540.flv"
+            videoUrl:"http://jhwenhua.shenke.group/static//video/2/2023-03-30/39356994/1680183014159.mp4"
+            //videoUrl:"https://pili-live-hdl.qingyajiu.com/live/7630e2be8af17546b47245fbca34a540.flv"
             // https://pili-live-hdl.qingyajiu.com/live/7630e2be8af17546b47245fbca34a540.flv
         }
         
@@ -56,10 +56,13 @@
      
     },
     components:{
+        // 使用的播放子组件
         VideoPlayer
     }
   };
   </script>
 
 <style scoped lang="less">
+
+
 </style>

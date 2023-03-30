@@ -1,9 +1,13 @@
 <template>
-    <div v-if="type === 'video'">
-      <video ref="videoPlayer" controls></video>
+    <div v-if="type === 'video'"  >
+        <video ref="videoPlayer" controls height="250px" width="100%"></video>
+
+        <!-- <iframe frameborder="0" allowfullscreen="true" scrolling="no" height="250px" width="100%" sandbox="allow-same-origin allow-scripts allow-forms">
+        </iframe>> -->
     </div>
     <div v-else-if="type === 'iframe'">
-      <iframe ref="videoPlayer" frameborder="0" allowfullscreen></iframe>
+        <!-- frameborder="0"  scrolling="no"  height="300px" width="100%" sandbox="allow-same-origin allow-scripts allow-forms" -->
+      <iframe ref="videoPlayer" frameborder="0" allowfullscreen="true" scrolling="no" height="250px" width="100%" sandbox="allow-same-origin allow-scripts allow-forms" ></iframe>
     </div>
     <div v-else>
       不支持的视频类型
@@ -13,8 +17,9 @@
   <script>
   import flvjs from 'flv.js'
   import videojs from 'video.js'
-  import 'video.js/dist/video-js.min.css'
-  //import 'videojs-contrib-hls/dist/videojs-contrib-hls.min.js'
+//   import 'video.js/dist/video-js.min.css'
+//   import 'videojs-contrib-hls/dist/videojs-contrib-hls.min.js'
+  
   export default {
     props: {
       type: {
@@ -68,3 +73,9 @@
     }
   }
   </script>
+
+<style scoped lang="less">
+
+
+
+</style>
