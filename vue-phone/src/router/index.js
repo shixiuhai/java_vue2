@@ -6,6 +6,8 @@ import Login from "@/views/user/UserLogin"
 import Information from "@/views/information/VideoInformation"
 // 导入用户信息表
 import UserInfo from "@/views/user/UserInfo"
+// 导入视频播放详情页
+import VideoDetail from "@/views/detail/VideoDetail"
 // 导入store
 import store from "@/store/index"
 Vue.use(VueRouter)
@@ -15,7 +17,8 @@ const routes = [
   {path:"/login",component:Login,name:"login"},
   // 判断是否登陆 meta: { requiresAuth: true}
   {path:"/",component:Information,name:"information", meta: { requiresAuth: true}},
-  {path:"/user",component:UserInfo,name:"userInfo", meta: { requiresAuth: true }}
+  {path:"/user",component:UserInfo,name:"user", meta: { requiresAuth: true }},
+  {path:"/detail",component:VideoDetail,name:"detail", meta: { requiresAuth: true }}
 ]
 
 const router = new VueRouter({

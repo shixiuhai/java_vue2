@@ -47,6 +47,7 @@
 </template>
 <script>
     import {getDicAPI,listVideoAPI} from "@/api/information/videoInformation"
+    import router from "@/router/index"
     export default {
         name:"VideoInformation",
         data(){
@@ -133,6 +134,13 @@
             // 跳转详情页
             toDetail(videoId){
                 console.log(videoId)
+                router.push({
+                    name:'detail',
+                    params:{
+                        id:videoId
+                    }
+
+                })
             },
             onLoad(){
                 this.loading=false

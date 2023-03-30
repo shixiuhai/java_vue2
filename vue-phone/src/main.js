@@ -14,6 +14,8 @@ import 'vant/lib/index.css'
 
 // 导入全局样式表
 import './index.less'
+// import EventTarget from 'event-target-polyfill'
+
 
 // 注册全局插件
 Vue.use(Vant)
@@ -21,6 +23,8 @@ Vue.use(VueLazyload)
 
 Vue.config.productionTip = false
 
+// // 将EventTarget添加到Vue原型中
+// Vue.prototype.$EventTarget = EventTarget
 
 
 new Vue({
