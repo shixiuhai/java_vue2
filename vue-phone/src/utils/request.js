@@ -18,7 +18,7 @@ import store from '@/store/index'
 // 调用 axios.create() 方法，创建 axios 的实例对象
 const instance = axios.create({
   // 请求根路径
-  baseURL: 'http://192.168.1.3:8081',
+  baseURL: 'http://192.168.1.4:8081',
   // 请求超时时间设置
   timeout: 5000,
   // 请求的headers设置
