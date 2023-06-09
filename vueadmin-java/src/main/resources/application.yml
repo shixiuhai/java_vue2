@@ -25,7 +25,7 @@ spring:
     password: sxh.200008 # 密码
     hostUrl: tcp://localhost:1883 # MQTT-服务器连接地址
     clientId: skwl_mqtt_client # MQTT-连接服务器默认客户端ID, 每个客户端启动的id要不同
-    receiveTopics: abc_topic,$share/g1/test # 监听的消息队列 $share/g1/test是使用g1组订阅test消息队列，同组间不会重复消费
+    receiveTopics: $SYS/brokers/+/clients/+/connected,$SYS/brokers/+/clients/+/disconnected,$share/g1/fire,$share/g1/smoke # 监听的消息队列 $share/g1/test是使用g1组订阅test消息队列，同组间不会重复消费
     timeout: 10 # 超时时间 单位/s
     keepAlive: 20 # 心跳的间隔
 
