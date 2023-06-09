@@ -12,19 +12,19 @@ public class MqttConsumer {
     @Value("${spring.mqtt.receiveTopics}")
     private String[] receiveTopics;
     public void consumerTopic(Message<?> message){
-        // System.out.println(receiveTopics[0]);
+        System.out.println(receiveTopics[1]);
         // System.out.println(message.getPayload());
         // System.out.println(message.getHeaders());
-        // System.out.println(message.getHeaders().get("mqtt_receivedTopic"));
+        System.out.println(message.getHeaders().get("mqtt_receivedTopic"));
         
-        if(message.getHeaders().get("mqtt_receivedTopic").equals(receiveTopics[0])){
+        if(message.getHeaders().get("mqtt_receivedTopic").equals(realTopic(receiveTopics[0]))){
             System.out.println("fist----topic");
             // System.out.println(message.getPayload());
             JSONObject result = JSONObject.parseObject(message.getPayload().toString());
             System.out.println(result);
 
         }
-        if(message.getHeaders().get("mqtt_receivedTopic").equals(receiveTopics[1])){
+        if(message.getHeaders().get("mqtt_receivedTopic").equals(realTopic(receiveTopics[1]))){
             // System.out.println(message.getPayload());
             JSONObject result = JSONObject.parseObject(message.getPayload().toString());
             // System.out.println("second---topic");
@@ -34,6 +34,12 @@ public class MqttConsumer {
             
        
         
+    }
+    
+    public String realTopic(String topic){
+        int length = topic.split("/").length;
+        return topic.split("/")[length-1];
+
     }
     
 }
