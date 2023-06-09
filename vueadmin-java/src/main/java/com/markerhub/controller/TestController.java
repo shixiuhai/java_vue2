@@ -1,6 +1,7 @@
 package com.markerhub.controller;
 
 import com.markerhub.common.lang.Result;
+import com.markerhub.entity.SysUser;
 import com.markerhub.mqtt.MqttProducer;
 import com.markerhub.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,9 @@ public class TestController {
 	@GetMapping("/test")
 	public Result test() {
 		mqttProducer.sendToMqtt("test", 0, "这是我史秀海发的测试数据");
-		return Result.succ("ok");
+		SysUser sysUser = sysUserService.getByUsername("admin");
+		sysUser.setPassword("1234");
+		return Result.succ(sysUser);
 	}
 
 	// 普通用户、超级管理员
