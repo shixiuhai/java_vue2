@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 127.0.0.1
+ Source Server         : 自己的数据库
  Source Server Type    : MySQL
  Source Server Version : 80031
- Source Host           : localhost:3306
+ Source Host           : 127.0.0.1:3306
  Source Schema         : video
 
  Target Server Type    : MySQL
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 13/03/2023 22:07:40
+ Date: 02/03/2024 16:54:43
 */
 
 SET NAMES utf8mb4;
@@ -230,7 +230,7 @@ CREATE TABLE `video_detail`  (
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '视频url',
   `created_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '生成记录时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video_detail
