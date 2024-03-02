@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			// "/videoDetail",
 			// "/parseVideo",
 			// "/sysDict"
-			"/test"
+			"/test",
+			"/api/gpt"
 
 	};
 

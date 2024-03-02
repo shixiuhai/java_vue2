@@ -25,7 +25,7 @@ public class TestController {
 	// @PreAuthorize("hasRole('admin')")
 	@GetMapping("/test")
 	public Result test() {
-		mqttProducer.sendToMqtt("test", 0, "这是我史秀海发的测试数据");
+		// mqttProducer.sendToMqtt("test", 0, "这是我史秀海发的测试数据");
 		SysUser sysUser = sysUserService.getByUsername("admin");
 		sysUser.setPassword("1234");
 		return Result.succ(sysUser);

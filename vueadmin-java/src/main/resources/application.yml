@@ -42,3 +42,14 @@ markerhub:
     expire: 29030400 #7天，秒单位
     secret: ji8n3439n439n43ld9ne9343fdfer49h
 
+openai:
+  apiKey: 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
+  chatModel: gpt-3.5-turbo
+  chatTemperature: 0.7
+  chatmaxTokens: 4000
+  conversationNumber: 5
+  proxyHost: 127.0.0.1
+  proxyPort: 10809
+  timeout: 15
+  isProxy: true
+
