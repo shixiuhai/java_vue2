@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/vueadmin?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/video?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: sxh.200008
   
@@ -19,6 +19,17 @@ spring:
         max-wait: -1
         min-idle: 0
         max-idle: 8
+
+  mqtt:
+    username: admin #账户
+    password: sxh.200008 # 密码
+    hostUrl: tcp://localhost:1883 # MQTT-服务器连接地址
+    clientId: skwl_mqtt_client # MQTT-连接服务器默认客户端ID, 每个客户端启动的id要不同
+    receiveTopics: $SYS/brokers/+/clients/+/connected,$SYS/brokers/+/clients/+/disconnected,$share/g1/fire,$share/g1/smoke # 监听的消息队列 $share/g1/test是使用g1组订阅test消息队列，同组间不会重复消费
+    timeout: 10 # 超时时间 单位/s
+    keepAlive: 20 # 心跳的间隔
+
+
 #  security:
 #    user:
 #      name: user
@@ -28,6 +39,17 @@ mybatis-plus:
 markerhub:
   jwt:
     header: Authorization
-    expire: 604800 #7天，秒单位
+    expire: 29030400 #7天，秒单位
     secret: ji8n3439n439n43ld9ne9343fdfer49h
+
+openai:
+  apiKey: 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
+  chatModel: gpt-3.5-turbo
+  chatTemperature: 0.7
+  chatmaxTokens: 4000
+  conversationNumber: 5
+  proxyHost: 127.0.0.1
+  proxyPort: 10809
+  timeout: 15
+  isProxy: true
 

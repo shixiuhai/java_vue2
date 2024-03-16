@@ -1,6 +1,8 @@
 package com.markerhub.controller;
 
 import com.markerhub.common.lang.Result;
+import com.markerhub.entity.SysUser;
+import com.markerhub.mqtt.MqttProducer;
 import com.markerhub.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,12 +17,18 @@ public class TestController {
 	SysUserService sysUserService;
 
 	@Autowired
+	MqttProducer mqttProducer;
+
+	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@PreAuthorize("hasRole('admin')")
+	// @PreAuthorize("hasRole('admin')")
 	@GetMapping("/test")
 	public Result test() {
-		return Result.succ(sysUserService.list());
+		// mqttProducer.sendToMqtt("test", 0, "这是我史秀海发的测试数据");
+		SysUser sysUser = sysUserService.getByUsername("admin");
+		sysUser.setPassword("1234");
+		return Result.succ(sysUser);
 	}
 
 	// 普通用户、超级管理员

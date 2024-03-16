@@ -30,10 +30,6 @@ public class AuthController extends BaseController{
 		String key = UUID.randomUUID().toString();
 		String code = producer.createText();
 
-		// 为了测试
-		key = "aaaaa";
-		code = "11111";
-
 		BufferedImage image = producer.createImage(code);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ImageIO.write(image, "jpg", outputStream);
@@ -50,7 +46,6 @@ public class AuthController extends BaseController{
 						.put("token", key)
 						.put("captchaImg", base64Img)
 						.build()
-
 		);
 	}
 
