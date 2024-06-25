@@ -1,1 +1,3 @@
-## 项目基础登录注册抄自 VueAdmin，springboot + vue 入门级项目
+### 项目描述
+* 项目来自VueAdmin，springboot + vue 
+* 当成学习用的项目
